@@ -1,0 +1,42 @@
+1. npm init -y
+to initialise node packages and automatically create node.js with default value
+2. wht is dependency
+Yes, a dependency is essentially a library/package that your project depends on to work. anything that ur application need when it runs
+eg: nodemon is a devdependency , as it is need only for development for for production
+3.dependencies
+express	Creates the web server and API routes.
+mongoose	Connects Node.js to MongoDB and provides schemas/models.
+dotenv	Loads environment variables from a .env file.
+bcrypt	Hashes passwords securely before storing them.
+jsonwebtoken	Creates and verifies JWT tokens for authentication.
+cors	Allows frontend apps from other origins/domains to call your API.
+multer	Handles file uploads (multipart/form-data).
+sharp	Processes images (resize, compress, crop, convert formats).
+cloudinary	Uploads and stores images/videos in Cloudinary cloud storage.
+
+4. The -D means they are installed as devDependencies because they're mainly needed during development and compilation.
+5. @types/express
+npm install -D @types/express
+
+Purpose: Type definitions for Express.(similarly others)
+6.npx tsc --init
+Creates a tsconfig.json file in your project.
+
+Think of tsconfig.json as the configuration file for TypeScript. It tells the TypeScript compiler (tsc) how to convert your .ts files into JavaScript.
+7. config/ : configuration files-> fo rconnection , setup , env configuration
+
+8. controllers. : business logic for routes(actual jo krna h vo code
+)
+Route receives request
+        ↓
+Controller does the work
+        ↓
+Response returned
+9 . middleware/ : functions that run before the controleer -> auth , error handling , upload , request validation
+10 .models. : schemas and models 
+11. roues/ : api endpoint
+12. types/ : custom typescript types and interfaces
+13. utils/ : reusable helper functions
+14. app.ts : configuration and config the express server
+15. server.ts : crates the server
+
