@@ -52,3 +52,6 @@ npm run dev
 ```txt
 http://localhost:5000
 ```
+
+## Author
+Khushi Bhardwaj
