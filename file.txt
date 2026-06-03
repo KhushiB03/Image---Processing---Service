@@ -39,4 +39,52 @@ Response returned
 13. utils/ : reusable helper functions
 14. app.ts : configuration and config the express server
 15. server.ts : crates the server
+16. Those are Git warnings, not errors. Your project will still work.
+
+The warning:
+
+warning: in the working copy of 'package-lock.json', LF will be replaced by CRLF the next time Git touches it
+
+means Git noticed a difference in line endings:
+
+LF (\n) = Unix/Linux/macOS style
+CRLF (\r\n) = Windows style
+
+Since you're on Windows (C:\Users\DELL\...), Git is telling you it may convert line endings when it updates the file.
+
+What should you do?
+
+Usually: nothing. It's harmless.
+
+If you want to stop the warnings
+
+Run:
+
+git config --global core.autocrlf true
+
+This is the common setting for Windows users.
+
+Or check your current setting:
+
+git config --global core.autocrlf
+Important
+
+These warnings are not related to:
+
+npm run dev
+Cannot GET /
+TypeScript compilation
+Express routes
+
+They only concern how Git stores text file line endings.
+
+If you're still seeing Cannot GET /, paste your:
+
+// src/app.ts
+
+and
+
+// src/server.ts
+
+and I'll help debug the actual API issue.
 
