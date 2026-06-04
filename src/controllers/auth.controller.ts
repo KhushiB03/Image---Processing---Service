@@ -1,8 +1,9 @@
 import DBconnect from "../config/db";
 import bcrypt from "bcrypt";
 import User from "../models/User";
+import generateToken from "../utils/generateToken";
 
-
+//register
 export const registerUser = async(req :any, res : any)=>{
     try {
         const { username , password} = req.body;
@@ -37,4 +38,43 @@ export const registerUser = async(req :any, res : any)=>{
         });
         
     }
+};
+//login
+export const loginUser = (req:any , res:any)=>{
+   try{
+     const { username , password} = req.body;
+    const user = await User.findOne({username});
+    if(!user){
+        return res.status(400).json({
+            message:"invalid credentials";
+        })
+    }
+    const isMatch = await bcrypt.compare(
+        password , 
+        user.password
+    )
+    if(!isMatch){
+        return res.status(401).json({
+        message: "Invalid credentials",
+      });
+
+    }
+
+    const token = generateToken(user.username);
+    res.status(200).json({
+        message:"login successful",
+        token ,
+        user:{
+            id:user._id,
+            username: user.username,
+        },
+
+    });
+   }
+    catch(err){
+        res.status(500).json({
+            message:"server occured!",
+        });
+    }
+
 };

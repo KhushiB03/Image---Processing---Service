@@ -41,3 +41,71 @@ Response returned
 15. server.ts : crates the server
 16. Those are Git warnings, not errors. Your project will still work.
 17. Processe.exit(1)
+18.npm install -D @types/express
+  installs TypeScript typings for the Express library, allowing TypeScript to understand Express APIs and provide:
+  Autocomplete
+  Type checking 
+  Better editor support
+  19. jwt.sign() is used to create a JSON Web Token (JWT).
+
+What does the token hold?
+
+The token contains the payload you pass as the first argument to jwt.sign().
+
+In the example above, the payload is:
+
+{
+  user: {
+    id: "12345",
+    username: "alice"
+  }
+}
+
+Along with standard JWT metadata such as:
+
+iat (issued at)
+exp (expiration time, if specified)
+JWT Structure
+
+
+A JWT has three parts:
+
+header.payload.signature
+jwt.sign(payload, secret, options)
+
+For example:
+
+eyJhbGciOiJIUzI1NiJ9.
+eyJ1c2VyIjp7ImlkIjoiMTIzNDUiLCJ1c2VybmFtZSI6ImFsaWNlIn19.
+abc123...
+Header: algorithm information
+Payload: your data (id, username, etc.)
+Signature: verifies the token hasn't been tampered with
+Important
+
+The payload is not encrypted by default—it's only encoded (Base64URL). Anyone who gets the token can decode and read the payload.
+
+So don't put sensitive information like:
+
+{
+  password: "secret",
+  creditCard: "1234..."
+}
+
+Instead, store only things needed to identify the user:
+
+{
+  user: {
+    id: user._id
+  }
+}
+
+Then, when the user makes a request, you verify the token:
+
+const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+console.log(decoded.user.id);
+19 . because of ye timestamp- createdAt , updatedAt aa jata hai vrna manually krnapdhta
+
+
+
