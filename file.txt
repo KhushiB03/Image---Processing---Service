@@ -107,5 +107,27 @@ const decoded = jwt.verify(token, process.env.JWT_SECRET);
 console.log(decoded.user.id);
 19 . because of ye timestamp- createdAt , updatedAt aa jata hai vrna manually krnapdhta
 
+20. Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6... // this is how thw incoming header comes
+21.These are TypeScript types, not runtime values.
+
+Think of them like “labels” for objects:
+Request → shape of req
+Response → shape of res
+NextFunction → shape of next
+
+They help TypeScript understand what properties exist.Without them, TypeScript doesn't know:
+
+req.body
+req.headers
+res.status
+next()
+for eg : TypeScript complains:
+
+Property 'user' does not exist on type 'Request'
+so we use (req as any).user = decoded;
+22.? checks to call this startswith only when it is not null or undefined
+
+
+
 
 
