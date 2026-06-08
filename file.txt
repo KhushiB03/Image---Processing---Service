@@ -126,6 +126,7 @@ for eg : TypeScript complains:
 Property 'user' does not exist on type 'Request'
 so we use (req as any).user = decoded;
 22.? checks to call this startswith only when it is not null or undefined
+23. Multer parses incoming multipart/form-data requests (the format used when uploading files from a form).
 
 
 
