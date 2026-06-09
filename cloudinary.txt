@@ -1,0 +1,56 @@
+1. in the uploadiMAGE
+WE CAN SIMPLY USE UPLOADER FUNCTION TEN WHY WE NEED A PROMISE?
+upload()
+ └── callback()
+       └── return result
+       function s lik this when u will return result it will return the callbak and not the outer function
+
+upload(buffer)
+│
+├─ Create Promise
+│
+├─ Create Cloudinary upload stream
+│
+├─ Send buffer
+│     stream.end(buffer)
+│
+├─ Upload happening...
+│
+├─ Cloudinary finishes
+│
+├─ Callback runs
+│
+├─ Success?
+│      └─ resolve(result)
+│
+└─ Failure?
+       └─ reject(error)
+       But await only works with Promises, not callbacks.
+       CALL ME LATER  (callback)
+        ↓
+PROMISE
+        ↓
+I'LL WAIT (await)
+
+What does upload.single("image") do?
+
+
+It reads the incoming file and adds it to the request object:
+req.file = {
+  originalname: "cat.jpg",
+  buffer: ...,
+  mimetype: "image/jpeg"
+}Request with image
+        ↓
+Controller
+        ↓
+req.file = undefined ❌
+Request with image
+        ↓
+upload.single("image")
+        ↓
+req.file created
+        ↓
+Controller
+        ↓
+req.file available ✅

@@ -1,7 +1,7 @@
-import { UploadApiErrorResponse, UploadApiResponse } from "cloudinary";
+import {  UploadApiResponse } from "cloudinary";
 import cloudinary from "../config/cloudinary";
 
-const upload = async (fileBuffer: Buffer): Promise<UploadApiResponse> => {
+const uploadImage = async (fileBuffer: Buffer): Promise<UploadApiResponse> => {
   return new Promise<UploadApiResponse>((resolve, reject) => {
     cloudinary.uploader
       .upload_stream(
@@ -14,6 +14,7 @@ const upload = async (fileBuffer: Buffer): Promise<UploadApiResponse> => {
             {quality:"auto"}
           ]
         },
+        //this is a callback
         (error, result) => {
           if (error) return reject(error);
           if (!result) {
@@ -26,4 +27,4 @@ const upload = async (fileBuffer: Buffer): Promise<UploadApiResponse> => {
       .end(fileBuffer);
   });
 };
-export default upload;
+export default uploadImage;
