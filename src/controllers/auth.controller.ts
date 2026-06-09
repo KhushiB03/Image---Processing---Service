@@ -58,7 +58,7 @@ export const loginUser = async (req: any, res: any) => {
       });
     }
 
-    const token = generateToken(user.username);
+    const token = generateToken(user._id.toString());
     res.status(200).json({
       message: "login successful",
       token,
@@ -84,3 +84,5 @@ export const getCurrentUser = async (req: any, res: any) => {
     });
   }
 };
+//register then login id right then generate token
+
