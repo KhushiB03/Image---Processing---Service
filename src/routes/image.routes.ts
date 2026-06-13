@@ -1,7 +1,7 @@
 import  express  from "express";
 import authmiddleware from "../middlewares/auth.middleware";
 import upload from "../middlewares/upload.middleware";
-import {uploadUserImage , } from "../controllers/image.controller";
+import {uploadUserImage , transformImage ,  } from "../controllers/image.controller";
 
 const router = express.Router();
 router.post("/"  , 
@@ -10,4 +10,10 @@ router.post("/"  ,
     upload.single("image"),
     uploadUserImage
 );
+router.post(
+  "/:id/transform",
+  authmiddleware,
+  transformImage
+);
+
 export default router;

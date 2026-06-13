@@ -23,6 +23,9 @@ const ImageSchema = new mongoose.Schema(
         type:String,
         required:true,
     },
+    width:Number ,
+    height : Number,
+    format:String,
 },
 //auomatically add createdat and uupdated add
 {timestamps:true},

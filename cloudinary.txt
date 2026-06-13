@@ -54,3 +54,18 @@ req.file created
 Controller
         ↓
 req.file available ✅
+
+sharp is an npm package used to wrap high performance livips imag library and desines to be fast and memory efficient.
+Sharp works with buffer
+let transformed = sharp(buffer);
+
+Now Sharp loads the image into memory.
+let outputBuffer: Buffer;
+
+We'll store the transformed image here.
+case "png":
+  outputBuffer =
+    await transformed
+      .png()
+      .toBuffer();image to png convert
+
