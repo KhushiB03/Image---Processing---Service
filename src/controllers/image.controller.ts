@@ -2,9 +2,7 @@ import Image from "../models/Image";
 import sharp from "sharp";
 import cloudinary from "../config/cloudinary";
 import uploadImage from "../utils/uploadImage";
-import { resolve } from "node:dns";
-import { rejects } from "node:assert";
-
+//upload image
 export const uploadUserImage = async (req: any, res: any) => {
   try {
     if (!req.file) {
