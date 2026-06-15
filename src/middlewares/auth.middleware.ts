@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 
 const authmiddleware=(req:Request , res:Response , next: NextFunction)=>{
     try {
+       
         const authHeader = req.headers.authorization;
         if(!authHeader?.startsWith("Bearer ")){
             // not starting with bearere then reject request
@@ -10,12 +11,18 @@ const authmiddleware=(req:Request , res:Response , next: NextFunction)=>{
                 message:'Unauthorized',
             });
         }
-        const token = authHeader.split(" ")[1];
+        const token = authHeader.split(" ")[1]?.trim();
         const decoded = jwt.verify(//2 args
             token,//token
             process.env.JWT_SECRET as string,//secret key
 
         );
+        console.log("AUTH HEADER:", req.headers.authorization);
+console.log("TOKEN:", token);
+console.log("SECRET:", process.env.JWT_SECRET);
+        if(decoded){
+            console.log("matched jwt");
+        }
         //“Attach the decoded user data to the request object so that the next middleware or route can use it.”
         (req as any ).user = decoded;
         next();

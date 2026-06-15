@@ -27,15 +27,10 @@ export const uploadUserImage = async (req: any, res: any) => {
     });
   }
 };
-//transform image 
-export const transformImage = async (
-  req: any,
-  res: any
-) => {
+//transform image
+export const transformImage = async (req: any, res: any) => {
   try {
-    const image = await Image.findById(
-      req.params.id
-    );
+    const image = await Image.findById(req.params.id);
 
     if (!image) {
       return res.status(404).json({
@@ -43,70 +38,56 @@ export const transformImage = async (
       });
     }
 
-    const { width, height, rotate, format } =
-      req.body;
+    const { width, height, rotate, format } = req.body;
 
-    const response = await fetch(
-      image.imageUrl
-    );
+    const response = await fetch(image.imageUrl);
 
     const arrayBuffer =
+      //arraybuffer has raw bytes of file
       await response.arrayBuffer();
 
+    //Buffer converts arraybuffer to nodejs biffer
     const buffer = Buffer.from(arrayBuffer);
 
     let transformed = sharp(buffer);
 
     if (width || height) {
-      transformed = transformed.resize(
-        Number(width),
-        Number(height)
-      );
+      transformed = transformed.resize(Number(width), Number(height));
     }
 
     if (rotate) {
-      transformed = transformed.rotate(
-        Number(rotate)
-      );
+      transformed = transformed.rotate(Number(rotate));
     }
 
     let outputBuffer: Buffer;
 
     switch (format) {
       case "png":
-        outputBuffer = await transformed
-          .png()
-          .toBuffer();
+        outputBuffer = await transformed.png().toBuffer();
         break;
 
       case "webp":
-        outputBuffer = await transformed
-          .webp()
-          .toBuffer();
+        outputBuffer = await transformed.webp().toBuffer();
         break;
 
       default:
-        outputBuffer = await transformed
-          .jpeg()
-          .toBuffer();
+        outputBuffer = await transformed.jpeg().toBuffer();
     }
 
-    const uploaded = await new Promise<any>(
-      (resolve, reject) => {
-        cloudinary.uploader
-          .upload_stream(
-            {
-              folder:
-                "image-processing-service",
-            },
-            (error, result) => {
-              if (error) reject(error);
-              else resolve(result);
-            }
-          )
-          .end(outputBuffer);
-      }
-    );
+    const uploaded = await new Promise<any>((resolve, reject) => {
+      cloudinary.uploader
+        .upload_stream(
+          {
+            folder: "image-processing-service",
+          },
+          (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+          },
+        )
+        //assigned chunks and close the response
+        .end(outputBuffer);
+    });
 
     const newImage = await Image.create({
       userId: req.user.userId,
@@ -119,8 +100,7 @@ export const transformImage = async (
     });
 
     res.status(200).json({
-      message:
-        "Image transformed successfully",
+      message: "Image transformed successfully",
       image: newImage,
     });
   } catch (error) {
