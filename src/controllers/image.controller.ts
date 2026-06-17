@@ -121,70 +121,63 @@ export const transformImage = async (req: any, res: any) => {
   }
 };
 //getAllUsers
-export const getAllUsers =async (req:any , res:any)=>{
+export const getAllUsers = async (req: any, res: any) => {
   try {
-    const page = Number(req.query.page)||1;
-    const limit = Number(req.query.limit)||10;
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 10;
     const images = await Image.find({
-      userId : req.user.userId,
+      userId: req.user.userId,
     })
-    //-1 means decreasing order: newest first
-    .sort({createdAt :-1})
-    //skip previous page records
-    .skip((page-1)*limit)
-    .limit(limit)
+      //-1 means decreasing order: newest first
+      .sort({ createdAt: -1 })
+      //skip previous page records
+      .skip((page - 1) * limit)
+      .limit(limit);
     res.status(200).json({
-      images
-    })
+      images,
+    });
   } catch (error) {
     res.status(500).json({
-      message : "failed to retrieve images from cloudinary"
-    })
-    
+      message: "failed to retrieve images from cloudinary",
+    });
   }
-
-}
-//getSingleImage 
-export const getSingleImage = async(req:any , res: any)=>{
+};
+//getSingleImage
+export const getSingleImage = async (req: any, res: any) => {
   try {
     const image = Image.findOne({
       id: req.params.userId,
-      userId : req.user.id,
-
+      userId: req.user.id,
     });
-    if(! image){
+    if (!image) {
       return res.status(404).json({
-        message:"image not found !!"
+        message: "image not found !!",
       });
     }
     //means image is sent to the frontend
-    res.status(200).json({image
-    });
+    res.status(200).json({ image });
   } catch (error) {
     res.status(500).json({
-      message:"failed to fetch the image"
+      message: "failed to fetch the image",
     });
-    
   }
-}
+};
 //delete image
-export const deleteImage = async(req:any , res:any )=>{
+export const deleteImage = async (req: any, res: any) => {
   try {
     const id = req.params.id;
     const image = Image.findByIdAndDelete(id);
-    if(!image){
+    if (!image) {
       res.status(404).json({
-        message:"image not found"
+        message: "image not found",
       });
     }
     res.status(200).json({
-      message:"image successfully deleted"
+      message: "image successfully deleted",
     });
-    
   } catch (error) {
     res.status(500).json({
-      message: " problem occured in deleting the image"
-    })
-    
+      message: " problem occured in deleting the image",
+    });
   }
-}
+};

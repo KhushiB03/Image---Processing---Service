@@ -1,57 +1,97 @@
 # Image Processing Service
 
-A backend image processing service built with Node.js, Express, TypeScript, MongoDB Atlas, Cloudinary, and Sharp.
+A full-stack image processing application inspired by Cloudinary.
+
+Users can register, log in, upload images, apply transformations, and retrieve transformed images.
 
 ## Features
 
-* User Authentication (JWT)
-* Image Upload
-* Image Transformations
+### Authentication
 
-  * Resize
-  * Rotate
-  * Format Conversion
-* Image Metadata Storage
-* User Image Management
-* Cloud Storage Integration
+* User Registration
+* User Login
+* JWT Authentication
+* Protected Routes
+
+### Image Management
+
+* Upload Images
+* Store Images on Cloudinary
+* Save Metadata in MongoDB Atlas
+
+### Image Transformations
+
+* Resize Images
+* Rotate Images
+* Convert Formats (JPEG, PNG, WebP)
 
 ## Tech Stack
+
+### Backend
 
 * Node.js
 * Express.js
 * TypeScript
 * MongoDB Atlas
-* Cloudinary
+* Mongoose
+* JWT
+* Bcrypt
+
+### Image Processing
+
 * Sharp
+* Cloudinary
+
+### Frontend
+
+* React
+* Vite
+* Axios
+
+## API Endpoints
+
+### Authentication
+
+POST /auth/registerUser
+
+POST /auth/loginUser
+
+GET /auth/me
+
+### Images
+
+POST /images
+
+POST /images/:id/transform
+
+## Environment Variables
+
+PORT=
+
+MONGO_URI=
+
+JWT_SECRET=
+
+CLOUDINARY_CLOUD_NAME=
+
+CLOUDINARY_API_KEY=
+
+CLOUDINARY_API_SECRET=
 
 ## Installation
 
-```bash
 npm install
-```
 
-Create a `.env` file using `.env.example`.
-
-Start development server:
-
-```bash
 npm run dev
-```
 
-## Project Status
+## Future Improvements
 
-* [x] Project Setup
-* [🔄] MongoDB Connection
-* [ ] User Authentication
-* [ ] Image Upload
-* [ ] Image Transformations
-* [ ] Deployment
-
-## API Base URL
-
-```txt
-http://localhost:5000
-```
+* Watermarking
+* Image Filters
+* Image Deletion
+* Pagination
+* Batch Processing
 
 ## Author
+
 Khushi Bhardwaj
