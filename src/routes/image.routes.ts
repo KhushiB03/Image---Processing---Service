@@ -1,7 +1,7 @@
 import  express  from "express";
 import authmiddleware from "../middlewares/auth.middleware";
 import upload from "../middlewares/upload.middleware";
-import {uploadUserImage , transformImage ,  } from "../controllers/image.controller";
+import {uploadUserImage , transformImage , getAllUsers , getSingleImage , deleteImage ,   } from "../controllers/image.controller";
 
 const router = express.Router();
 router.post("/"  , 
@@ -15,5 +15,11 @@ router.post(
   authmiddleware,
   transformImage
 );
+router.get("/" , 
+  authmiddleware , 
+  getAllUsers
+);
+router.get("/:id" , authmiddleware , getSingleImage);
+router.get("/:id" , deleteImage);
 
 export default router;

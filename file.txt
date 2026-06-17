@@ -143,6 +143,11 @@ Import:
 
 import uploadUserImage from "./file.js";
 
+25. Haan, bilkul. req.user koi special JavaScript keyword nahi hai. Ye ek common convention hai jo authentication middleware use karta hai.
+26 .   //means image is sent to the frontend
+    res.status(200).json({image
+    });
+
 
 
 
