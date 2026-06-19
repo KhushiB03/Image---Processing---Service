@@ -22,22 +22,24 @@ export default function Login(){
         }
     };
     return(
-        <div>
-        <h1>LOGIN</h1>
-
-        <input type="text"
-        placeholder="username"
-        value={username}
-        onChange={(e)=>setusername(e.target.value)} />
-
-        <input type="password" 
-        placeholder="password"
-        value={password}
-        onChange={(e)=>setpassword(e.target.value)} />
-
-        <button type="submit"
-        onSubmit={handleLogin}>LOGIN</button>
         
-        </div>
+       <form onSubmit={handleLogin}>
+        <h1>LOGIN</h1>
+  <input
+    type="text"
+    placeholder="username"
+    value={username}
+    onChange={(e) => setusername(e.target.value)}
+  />
+
+  <input
+    type="password"
+    placeholder="password"
+    value={password}
+    onChange={(e) => setpassword(e.target.value)}
+  />
+
+  <button type="submit">LOGIN</button>
+</form>
     );
 }
