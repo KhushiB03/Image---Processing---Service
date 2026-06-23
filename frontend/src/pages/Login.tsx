@@ -16,6 +16,10 @@ export default function Login(){
           alert(res.data);
           setusername("");
           setpassword("");
+          localStorage.setItem("token" ,
+            res.data.token
+          );
+          window.location.href="/dashboard";
         } catch (error :any)  {
             alert(error.data.message);
             

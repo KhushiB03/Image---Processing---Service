@@ -22,7 +22,8 @@ export default function Dashboard() {
         </>
       )}
 
-      {imageId && <TransformForm imageId={imageId} setImageUrl={setImageUrl} />}
+      {imageId && 
+      <TransformForm imageId={imageId} setImageUrl={setImageUrl} />}
     </div>
   );
 }
