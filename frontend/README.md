@@ -1,75 +1,207 @@
-# React + TypeScript + Vite
+# Image Processing Service - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend application for the Image Processing Service built with React, TypeScript, and Vite.
 
-Currently, two official plugins are available:
+This application allows users to register, log in, upload images, apply transformations, and view processed images.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Features
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+### Authentication
+- User Registration
+- User Login
+- JWT Token Storage
+- Protected API Requests
 
-Note: This will impact Vite dev & build performances.
+### Image Processing
+- Upload Images
+- Preview Uploaded Images
+- Resize Images
+- Rotate Images
+- Convert Image Formats (JPEG, PNG, WEBP)
+- View Transformed Images
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- React
+- TypeScript
+- Vite
+- Axios
+- React Router DOM
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Folder Structure
+
+```txt
+src/
+│
+├── components/
+│   ├── UploadForm.tsx
+│   ├── TransformForm.tsx
+│   └── Navbar.tsx
+│
+├── pages/
+│   ├── Login.tsx
+│   ├── Register.tsx
+│   └── Dashboard.tsx
+│
+├── services/
+│   └── api.ts
+│
+├── App.tsx
+├── main.tsx
+└── index.css
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Installation
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Clone the repository and navigate to the frontend directory:
+
+```bash
+cd frontend
 ```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run development server:
+
+```bash
+npm run dev
+```
+
+The application will run on:
+
+```txt
+http://localhost:5173
+```
+
+---
+
+## Environment Variables
+
+Create a `.env` file in the frontend directory.
+
+```env
+VITE_API_URL=http://localhost:5000
+```
+
+For production:
+
+```env
+VITE_API_URL=https://your-backend.onrender.com
+```
+
+---
+
+## Available Pages
+
+### Login
+
+```txt
+/
+```
+
+Allows existing users to log in.
+
+---
+
+### Register
+
+```txt
+/register
+```
+
+Allows new users to create an account.
+
+---
+
+### Dashboard
+
+```txt
+/dashboard
+```
+
+Allows authenticated users to:
+
+- Upload images
+- Preview images
+- Apply transformations
+- View transformed results
+
+---
+
+## API Integration
+
+The frontend communicates with the backend using Axios.
+
+Example configuration:
+
+```ts
+import axios from "axios";
+
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
+});
+
+export default api;
+```
+
+JWT tokens are automatically attached to authenticated requests.
+
+---
+
+## Build for Production
+
+Create an optimized production build:
+
+```bash
+npm run build
+```
+
+Preview the production build locally:
+
+```bash
+npm run preview
+```
+
+---
+
+## Deployment
+
+Recommended Platforms:
+
+- Vercel
+- Netlify
+
+Deployment requires:
+
+```env
+VITE_API_URL=https://your-backend-url.onrender.com
+```
+
+---
+
+## Future Enhancements
+
+- Grayscale Filter
+- Blur Filter
+- Flip / Mirror Transformations
+- Image Gallery
+- Download Processed Images
+- Dark Mode
+
+---
+
+## Author
+
+Khushi Bhardwaj

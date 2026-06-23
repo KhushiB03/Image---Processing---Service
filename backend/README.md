@@ -1,97 +1,110 @@
-# Image Processing Service
+# Image Processing Service - Frontend
 
-A full-stack image processing application inspired by Cloudinary.
-
-Users can register, log in, upload images, apply transformations, and retrieve transformed images.
+Frontend application for the Image Processing Service.
 
 ## Features
 
-### Authentication
+- User Registration
+- User Login
+- JWT Authentication
+- Image Upload
+- Image Preview
+- Image Transformations
+- Responsive UI
 
-* User Registration
-* User Login
-* JWT Authentication
-* Protected Routes
-
-### Image Management
-
-* Upload Images
-* Store Images on Cloudinary
-* Save Metadata in MongoDB Atlas
-
-### Image Transformations
-
-* Resize Images
-* Rotate Images
-* Convert Formats (JPEG, PNG, WebP)
+---
 
 ## Tech Stack
 
-### Backend
+- React
+- TypeScript
+- Vite
+- Axios
+- React Router DOM
 
-* Node.js
-* Express.js
-* TypeScript
-* MongoDB Atlas
-* Mongoose
-* JWT
-* Bcrypt
-
-### Image Processing
-
-* Sharp
-* Cloudinary
-
-### Frontend
-
-* React
-* Vite
-* Axios
-
-## API Endpoints
-
-### Authentication
-
-POST /auth/registerUser
-
-POST /auth/loginUser
-
-GET /auth/me
-
-### Images
-
-POST /images
-
-POST /images/:id/transform
-
-## Environment Variables
-
-PORT=
-
-MONGO_URI=
-
-JWT_SECRET=
-
-CLOUDINARY_CLOUD_NAME=
-
-CLOUDINARY_API_KEY=
-
-CLOUDINARY_API_SECRET=
+---
 
 ## Installation
 
+```bash
 npm install
+```
 
+Run development server:
+
+```bash
 npm run dev
+```
 
-## Future Improvements
+Build project:
 
-* Watermarking
-* Image Filters
-* Image Deletion
-* Pagination
-* Batch Processing
+```bash
+npm run build
+```
 
-## Author
+Preview build:
 
-Khushi Bhardwaj
+```bash
+npm run preview
+```
+
+---
+
+## Environment Variables
+
+Create a `.env` file:
+
+```env
+VITE_API_URL=http://localhost:5000
+```
+
+For production:
+
+```env
+VITE_API_URL=https://your-backend-url.onrender.com
+```
+
+---
+
+## Pages
+
+### Login
+
+```txt
+/
+```
+
+### Register
+
+```txt
+/register
+```
+
+### Dashboard
+
+```txt
+/dashboard
+```
+
+---
+
+## Project Structure
+
+```txt
+src/
+├── components/
+├── pages/
+├── services/
+├── App.tsx
+├── main.tsx
+└── index.css
+```
+
+---
+
+## Deployment
+
+Recommended:
+
+- Vercel
+- Netlify
