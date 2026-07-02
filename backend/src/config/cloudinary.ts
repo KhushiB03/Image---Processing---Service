@@ -5,11 +5,11 @@
 import "dotenv/config";
 import { v2 as cloudinary } from "cloudinary";
 
-console.log("BEFORE CONFIG", {
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret_exists: !!process.env.CLOUDINARY_API_SECRET,
-});
+// console.log("BEFORE CONFIG", {
+//   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+//   api_key: process.env.CLOUDINARY_API_KEY,
+//   api_secret_exists: !!process.env.CLOUDINARY_API_SECRET,
+// });
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -17,6 +17,6 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-console.log("AFTER CONFIG", cloudinary.config());
+// console.log("AFTER CONFIG", cloudinary.config());
 
 export default cloudinary;

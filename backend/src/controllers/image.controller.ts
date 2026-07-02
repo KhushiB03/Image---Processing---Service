@@ -11,8 +11,8 @@ export const uploadUserImage = async (req: any, res: any) => {
       });
     }
 
-    console.log("req.file:", req.file);
-    console.log("req.user:", req.user);
+    // console.log("req.file:", req.file);
+    // console.log("req.user:", req.user);
 
     const uploaded = await uploadImage(req.file.buffer);
 
