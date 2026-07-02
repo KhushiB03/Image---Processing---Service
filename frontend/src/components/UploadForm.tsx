@@ -18,7 +18,7 @@ export default function UploadForm({ setImageId, setImageUrl }: props) {
       const res = await api.post("/images", formData);
       setImageId(res.data.image._id);
       setImageUrl(res.data.image.imageUrl);
-      alert("uplod successful");
+      alert("uploaded successfully");
     } catch {
       alert("upload failed");
     }

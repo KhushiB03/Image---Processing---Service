@@ -1,3 +1,4 @@
+import "../pages/reg+dash.css"
 import React, { useState } from "react";
 import api from "../services/api";
 
@@ -20,8 +21,9 @@ export const Register = () => {
     }
   };
   return (
-    <div>
-      <h1>REGISTER</h1>
+    <div className="register-page">
+      <div className="register-card">
+        <h1>REGISTER</h1>
       <form onSubmit={handleRegister}>
         <input
           type="text"
@@ -39,6 +41,8 @@ export const Register = () => {
 
         <button type="submit">REGISTER</button>
       </form>
+      </div>
+      
     </div>
   );
 };

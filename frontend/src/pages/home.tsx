@@ -5,10 +5,10 @@ export default function Home(){
     return(
         <>
         <h1>Welocome to image - processing-webApp</h1>
-        <Link to="/Login">
+        <Link to="/loginUser">
         <button>LOGIN</button></Link>
 
-        <Link to="/Register">
+        <Link to="/registerUser">
         <button>Register</button></Link>
 
         <Link to="/Dashboard">

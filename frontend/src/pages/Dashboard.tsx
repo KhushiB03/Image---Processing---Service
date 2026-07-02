@@ -1,3 +1,4 @@
+import "../pages/reg+dash.css";
 import { useState } from "react";
 
 import UploadForm from "../components/UploadForm";
@@ -9,8 +10,9 @@ export default function Dashboard() {
   const [imageUrl, setImageUrl] = useState("");
 
   return (
-    <div>
-      <h1>Image Processing Dashboard</h1>
+    <div className="dashboard">
+      <div className="dashboard-card">
+        <h1>Image Processing Dashboard</h1>
 
       <UploadForm setImageId={setImageId} setImageUrl={setImageUrl} />
 
@@ -24,6 +26,7 @@ export default function Dashboard() {
 
       {imageId && 
       <TransformForm imageId={imageId} setImageUrl={setImageUrl} />}
+      </div>
     </div>
   );
 }

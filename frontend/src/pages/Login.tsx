@@ -1,5 +1,7 @@
+import "../pages/Login.css";
 import { useState } from "react";
 import api from "../services/api";
+import {Link} from "react-router-dom";
 
 export default function Login(){
     //vars
@@ -13,7 +15,7 @@ export default function Login(){
             "/auth/loginUser",
             {username , password},
           ) ;
-          alert(res.data);
+          alert("succesfull login");
           setusername("");
           setpassword("");
           localStorage.setItem("token" ,
@@ -44,6 +46,11 @@ export default function Login(){
   />
 
   <button type="submit">LOGIN</button>
+  <p style={{marginTop:"15px"}}>
+    New user?{"   "}
+    <Link to="/registerUser">
+    Register here</Link>
+  </p>
 </form>
     );
 }

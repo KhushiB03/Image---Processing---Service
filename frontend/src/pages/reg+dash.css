@@ -1,0 +1,201 @@
+.register-page,
+.dashboard{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+
+    radial-gradient(circle at 15% 20%,#8b5cf640 0%,transparent 30%),
+
+    radial-gradient(circle at 80% 10%,#2563eb40 0%,transparent 35%),
+
+    radial-gradient(circle at 50% 100%,#9333ea30 0%,transparent 35%),
+
+    #050510;
+}
+.register-page::before,
+.dashboard::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:700px;
+
+    height:700px;
+
+    border-radius:50%;
+
+    background:#7c3aed;
+
+    filter:blur(180px);
+
+    opacity:.18;
+
+    animation:floatGlow 10s infinite alternate;
+}
+
+.register-page::after,
+.dashboard::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:600px;
+
+    height:600px;
+
+    right:-150px;
+
+    bottom:-150px;
+
+    background:#2563eb;
+
+    border-radius:50%;
+
+    filter:blur(180px);
+
+    opacity:.15;
+}
+
+@keyframes floatGlow{
+
+    from{
+
+        transform:translateY(-40px);
+
+    }
+
+    to{
+
+        transform:translateY(40px);
+
+    }
+
+}
+.register-card,
+.dashboard-card{
+
+    width:900px;
+
+    max-width:95%;
+
+    padding:40px;
+
+    border-radius:25px;
+
+    backdrop-filter:blur(25px);
+
+    background:rgba(20,20,30,.55);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    box-shadow:
+
+    0 0 35px rgba(124,58,237,.25),
+
+    0 0 80px rgba(37,99,235,.15);
+}
+.dashboard h1{
+
+    color:white;
+
+    font-size:38px;
+
+    margin-bottom:35px;
+
+    text-align:center;
+
+    letter-spacing:1px;
+}
+.preview{
+
+    width:350px;
+
+    border-radius:18px;
+
+    margin-top:30px;
+
+    box-shadow:
+
+    0 0 20px #7c3aed,
+
+    0 0 45px #2563eb;
+
+    transition:.4s;
+}
+
+.preview:hover{
+
+    transform:scale(1.05);
+}
+
+button{
+
+    background:
+
+    linear-gradient(135deg,
+
+    #7c3aed,
+
+    #2563eb);
+
+    color:white;
+
+    transition:.35s;
+}
+
+button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+
+    0 0 20px #7c3aed,
+
+    0 0 45px #2563eb;
+}
+.login-page,
+.register-page{
+
+    min-height:100vh;
+    width:100%;
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    position:relative;
+    overflow:hidden;
+
+    padding:40px;
+}
+h1{
+
+    color:#ffffff;
+
+    font-size:42px;
+
+    text-align:center;
+
+    margin-bottom:28px;
+
+    font-weight:700;
+
+    letter-spacing:3px;
+
+    text-shadow:
+        0 0 10px #8b5cf6,
+        0 0 20px #3b82f6;
+}
