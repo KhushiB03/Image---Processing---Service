@@ -1,7 +1,7 @@
-import Image from "../models/Image";
+import Image from "../models/Image.js";
 import sharp from "sharp";
-import cloudinary from "../config/cloudinary";
-import uploadImage from "../utils/uploadImage";
+import cloudinary from "../config/cloudinary.js";
+import uploadImage from "../utils/uploadImage.js";
 //upload image
 export const uploadUserImage = async (req: any, res: any) => {
   try {

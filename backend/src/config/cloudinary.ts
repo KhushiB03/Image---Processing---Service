@@ -2,7 +2,7 @@
 //v2 refers to Cloudinary's version 2 API.Renames v2 to cloudinary for easier usage.
     //cloudinary property names. thes enams are defined in cloudinary SDK and so should br wriite nexactly like this
 
-import "dotenv/config";
+import "dotenv/config.js";
 import { v2 as cloudinary } from "cloudinary";
 
 // console.log("BEFORE CONFIG", {

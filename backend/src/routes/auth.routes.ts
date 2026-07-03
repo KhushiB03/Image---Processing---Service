@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { registerUser  ,loginUser , getCurrentUser} from "../controllers/auth.controller";
-import authmiddleware from "../middlewares/auth.middleware";
+import { registerUser  ,loginUser , getCurrentUser} from "../controllers/auth.controller.js";
+import authmiddleware from "../middlewares/auth.middleware.js";
 const route = Router();
 
 route.post("/registerUser" , registerUser);

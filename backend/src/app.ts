@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
 
-import authRoutes from "./routes/auth.routes";
-import imageRoutes from "./routes/image.routes";
+import authRoutes from "./routes/auth.routes.js";
+import imageRoutes from "./routes/image.routes.js";
 
 const app = express();
 

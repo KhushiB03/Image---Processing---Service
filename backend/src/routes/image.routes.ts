@@ -1,13 +1,13 @@
 import express from "express";
-import authmiddleware from "../middlewares/auth.middleware";
-import upload from "../middlewares/upload.middleware";
+import authmiddleware from "../middlewares/auth.middleware.js";
+import upload from "../middlewares/upload.middleware.js";
 import {
   uploadUserImage,
   transformImage,
   getAllUsers,
   getSingleImage,
   deleteImage,
-} from "../controllers/image.controller";
+} from "../controllers/image.controller.js";
 
 const router = express.Router();
 router.post(

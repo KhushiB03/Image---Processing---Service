@@ -1,5 +1,5 @@
 import {  UploadApiResponse } from "cloudinary";
-import cloudinary from "../config/cloudinary";
+import cloudinary from "../config/cloudinary.js";
 
 const uploadImage = async (fileBuffer: Buffer): Promise<UploadApiResponse> => {
   return new Promise<UploadApiResponse>((resolve, reject) => {
@@ -15,7 +15,7 @@ const uploadImage = async (fileBuffer: Buffer): Promise<UploadApiResponse> => {
           ]
         },
         //this is a callback
-        (error, result) => {
+        (error: any, result: any) => {
           if (error) return reject(error);
           if (!result) {
             return reject(new Error("upload failed"));

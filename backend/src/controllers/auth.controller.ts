@@ -1,7 +1,7 @@
-import DBconnect from "../config/db";
+import DBconnect from "../config/db.js";
 import bcrypt from "bcrypt";
-import User from "../models/User";
-import generateToken from "../utils/generateToken";
+import User from "../models/User.js";
+import generateToken from "../utils/generateToken.js";
 
 //register
 export const registerUser = async (req: any, res: any) => {
