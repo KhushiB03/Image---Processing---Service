@@ -14,7 +14,7 @@ Frontend:
 
 Backend:
 
-[Backend URL]
+https://image-processing-service-26hy.onrender.com
 
 ---
 
