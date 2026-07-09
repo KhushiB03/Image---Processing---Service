@@ -10,11 +10,11 @@ Users can register, upload images, perform transformations, and retrieve transfo
 
 Frontend:
 
-[Frontend URL]
+https://image-processing-frontend-kappa.vercel.app/
 
 Backend:
 
-[Backend URL]
+https://image-processing-service-26hy.onrender.com
 
 ---
 
