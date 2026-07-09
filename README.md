@@ -95,11 +95,14 @@ Sharp Transformations
 
 ### Login Page
 
-frontend\public\login.png
+<img src="frontend/public/login.png" width="800">
+
 
 ### Dashboard
 
-frontend\public\dashboard.png
+<img src="frontend\public\dashboard.png" width="800">
+
+
 
 ### Register Page
 
