@@ -106,7 +106,9 @@ Sharp Transformations
 
 ### Register Page
 
-frontend\public\register.png
+<img src="frontend\public\register.png" width="800">
+
+
 
 ---
 
