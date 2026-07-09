@@ -95,15 +95,15 @@ Sharp Transformations
 
 ### Login Page
 
-(Add screenshot)
+frontend\public\login.png
 
 ### Dashboard
 
-(Add screenshot)
+frontend\public\dashboard.png
 
-### Image Transformation
+### Register Page
 
-(Add screenshot)
+frontend\public\register.png
 
 ---
 
