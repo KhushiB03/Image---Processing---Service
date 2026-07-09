@@ -117,7 +117,7 @@ Sharp Transformations
 Clone repository:
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/KhushiB03/Image---Processing---Service.git
 ```
 
 Backend:
