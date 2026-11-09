@@ -1,4 +1,4 @@
-import mongoose, { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 
 export interface IUser extends mongoose.Document {
   username: string;
@@ -15,6 +15,7 @@ const schema = new mongoose.Schema<IUser>(
     password: {
       type: String,
       required: true,
+      select: false,
     },
   },
   {

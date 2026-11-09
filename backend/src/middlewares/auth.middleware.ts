@@ -1,4 +1,4 @@
-import { Request , Response , NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
 const authmiddleware=(req:Request , res:Response , next: NextFunction)=>{
@@ -19,7 +19,7 @@ const authmiddleware=(req:Request , res:Response , next: NextFunction)=>{
         );
         console.log("AUTH HEADER:", req.headers.authorization);
 console.log("TOKEN:", token);
-console.log("SECRET:", process.env.JWT_SECRET);
+// console.log("SECRET:", process.env.JWT_SECRET);
         if(decoded){
             console.log("matched jwt");
         }
