@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Image from "../models/Image.js";
 import sharp from "sharp";
 import cloudinary from "../config/cloudinary.js";
@@ -166,9 +167,17 @@ export const getSingleImage = async (req: any, res: any) => {
 //delete image
 export const deleteImage = async (req: any, res: any) => {
   try {
-    const id = req.params.id;
+    const { id } = req.params;
 
-    const image = await Image.findOneAndDelete({
+    // reject malformed ids up front instead of letting Mongoose throw a CastError (500)
+    if (!mongoose.isValidObjectId(id)) {
+      return res.status(400).json({
+        message: "Invalid image id",
+      });
+    }
+
+    // only the owner can delete; someone else's image looks the same as a missing one
+    const image = await Image.findOne({
       _id: id,
       userId: req.user.userId,
     });
@@ -179,10 +188,26 @@ export const deleteImage = async (req: any, res: any) => {
       });
     }
 
+    // Remove the Cloudinary asset first. If that fails, the DB record is kept so
+    // the user can retry instead of leaving an orphaned file in Cloudinary.
+    // "not found" means it is already gone (e.g. a retry), which is fine.
+    const result = await cloudinary.uploader.destroy(image.publicId, {
+      invalidate: true, // also purge cached CDN copies
+    });
+    if (result.result !== "ok" && result.result !== "not found") {
+      console.error("Cloudinary destroy failed:", image.publicId, result);
+      return res.status(502).json({
+        message: "Failed to delete image from storage",
+      });
+    }
+
+    await image.deleteOne();
+
     return res.status(200).json({
       message: "image successfully deleted",
     });
   } catch (error) {
+    console.error(error);
     return res.status(500).json({
       message: "problem occurred in deleting the image",
     });
