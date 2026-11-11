@@ -1,6 +1,6 @@
 import express from "express"
 import authmiddleware from "../middlewares/auth.middleware.js";
-import upload from "../middlewares/upload.middleware.js";
+import { uploadSingleImage } from "../middlewares/upload.middleware.js";
 import {
   uploadUserImage,
   transformImage,
@@ -14,7 +14,7 @@ router.post(
   "/",
   authmiddleware,
   //it prepares the request. The controller is the final step that uses the prepared data.
-  upload.single("image"),
+  uploadSingleImage("image"),
   uploadUserImage,
 );
 router.post("/:id/transform", authmiddleware, transformImage);

@@ -2,6 +2,9 @@ import Image from "../models/Image.js";
 import sharp from "sharp";
 import cloudinary from "../config/cloudinary.js";
 import uploadImage from "../utils/uploadImage.js";
+
+// formats as reported by sharp's metadata(); matches ALLOWED_MIME_TYPES in upload.middleware.ts
+const ALLOWED_IMAGE_FORMATS = ["jpeg", "png", "webp", "gif"];
 //upload image
 export const uploadUserImage = async (req: any, res: any) => {
   try {
@@ -13,6 +16,19 @@ export const uploadUserImage = async (req: any, res: any) => {
 
     // console.log("req.file:", req.file);
     // console.log("req.user:", req.user);
+
+    // the mimetype checked by multer comes from the client, so read the real format from the bytes
+    let detectedFormat: string | undefined;
+    try {
+      detectedFormat = (await sharp(req.file.buffer).metadata()).format;
+    } catch {
+      detectedFormat = undefined; // not an image sharp can read
+    }
+    if (!detectedFormat || !ALLOWED_IMAGE_FORMATS.includes(detectedFormat)) {
+      return res.status(400).json({
+        message: "Only JPEG, PNG, WEBP or GIF images are allowed",
+      });
+    }
 
     const uploaded = await uploadImage(req.file.buffer);
 
@@ -27,12 +43,12 @@ export const uploadUserImage = async (req: any, res: any) => {
       message: "file uploaded successfully",
       image,
     });
-  } catch (error: any) {
+  } catch (error) {
+    // log the details server-side only; they can contain Cloudinary/internal info
     console.error(error);
 
     return res.status(500).json({
       message: "internal error occurred",
-      error: error.message,
     });
   }
 };
