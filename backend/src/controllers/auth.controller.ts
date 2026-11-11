@@ -2,15 +2,14 @@ import DBconnect from "../config/db.js";
 import bcrypt from "bcrypt";
 import User from "../models/User.js";
 import generateToken from "../utils/generateToken.js";
+import { LoginInput, RegisterInput } from "../validators/auth.validator.js";
 
 //register
 export const registerUser = async (req: any, res: any) => {
   try {
-    const { username, password } = req.body;
-    //blank field
-    if (!username || !password) {
-      return res.status(400).json({ message: "user already exists" });
-    }
+    // already validated by registerSchema (see auth.routes.ts):
+    // both are strings, so they cannot carry Mongo query operators
+    const { username, password } = req.body as RegisterInput;
     //non unique names
     //curly bracket around username for {] to show it is object based
 
@@ -42,10 +41,9 @@ export const registerUser = async (req: any, res: any) => {
 //login
 export const loginUser = async (req: any, res: any) => {
   try {
-    const { username, password } = req.body;
-    console.log(req.body);
-    const user = await User.findOne({username});
-    console.log(user);
+    // already validated by loginSchema (see auth.routes.ts)
+    const { username, password } = req.body as LoginInput;
+    const user = await User.findOne({ username });
     if (!user) {
       return res.status(400).json({
         message: "invalid credentials",

@@ -1,13 +1,15 @@
-import express from "express"
-import authmiddleware from "../middlewares/auth.middleware.js";
-import upload from "../middlewares/upload.middleware.js";
+import express from "express";
 import {
-  uploadUserImage,
-  transformImage,
+  deleteImage,
   getAllUsers,
   getSingleImage,
-  deleteImage,
+  transformImage,
+  uploadUserImage,
 } from "../controllers/image.controller.js";
+import authmiddleware from "../middlewares/auth.middleware.js";
+import upload from "../middlewares/upload.middleware.js";
+import validate from "../middlewares/validate.middleware.js";
+import { transformSchema } from "../validators/image.validator.js";
 
 const router = express.Router();
 router.post(
@@ -17,7 +19,12 @@ router.post(
   upload.single("image"),
   uploadUserImage,
 );
-router.post("/:id/transform", authmiddleware, transformImage);
+router.post(
+  "/:id/transform",
+  authmiddleware,
+  validate(transformSchema),
+  transformImage,
+);
 router.get("/", authmiddleware, getAllUsers);
 router.get("/:id", authmiddleware, getSingleImage);
 router.delete("/:id", authmiddleware, deleteImage);

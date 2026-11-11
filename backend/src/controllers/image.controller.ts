@@ -1,7 +1,9 @@
-import Image from "../models/Image.js";
+import mongoose from "mongoose";
 import sharp from "sharp";
 import cloudinary from "../config/cloudinary.js";
+import Image from "../models/Image.js";
 import uploadImage from "../utils/uploadImage.js";
+import { TransformInput } from "../validators/image.validator.js";
 //upload image
 export const uploadUserImage = async (req: any, res: any) => {
   try {
@@ -39,7 +41,15 @@ export const uploadUserImage = async (req: any, res: any) => {
 //transform image
 export const transformImage = async (req: any, res: any) => {
   try {
-    const image = await Image.findById(req.params.id);
+    const { id } = req.params;
+
+    if (!mongoose.isValidObjectId(id)) {
+      return res.status(400).json({
+        message: "Invalid image id",
+      });
+    }
+
+    const image = await Image.findOne({ _id: id, userId: req.user.userId });
 
     if (!image) {
       return res.status(404).json({
@@ -47,7 +57,8 @@ export const transformImage = async (req: any, res: any) => {
       });
     }
 
-    const { width, height, rotate, format } = req.body;
+    // already validated and typed by transformSchema (see image.routes.ts)
+    const { width, height, rotate, format } = req.body as TransformInput;
 
     const response = await fetch(image.imageUrl);
 
@@ -60,12 +71,13 @@ export const transformImage = async (req: any, res: any) => {
 
     let transformed = sharp(buffer);
 
-    if (width || height) {
-      transformed = transformed.resize(Number(width), Number(height));
+    if (width !== undefined || height !== undefined) {
+      // a missing side is left undefined so sharp keeps the aspect ratio
+      transformed = transformed.resize(width, height);
     }
 
-    if (rotate) {
-      transformed = transformed.rotate(Number(rotate));
+    if (rotate !== undefined) {
+      transformed = transformed.rotate(rotate);
     }
 
     let outputBuffer: Buffer;
@@ -145,6 +157,12 @@ export const getAllUsers = async (req: any, res: any) => {
 //getSingleImage
 export const getSingleImage = async (req: any, res: any) => {
   try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return res.status(400).json({
+        message: "Invalid image id",
+      });
+    }
+
     const image = await Image.findOne({
       _id: req.params.id,
       userId: req.user.userId,
@@ -152,39 +170,53 @@ export const getSingleImage = async (req: any, res: any) => {
 
     if (!image) {
       return res.status(404).json({
-        message: "image not found",
+        message: "Image not found",
       });
     }
 
-    return res.status(200).json({ image });
+    return res.status(200).json({
+      image,
+    });
   } catch (error) {
     return res.status(500).json({
-      message: "failed to fetch the image",
+      message: "Failed to fetch the image",
     });
   }
 };
 //delete image
 export const deleteImage = async (req: any, res: any) => {
   try {
-    const id = req.params.id;
+    const { id } = req.params;
 
-    const image = await Image.findOneAndDelete({
+    if (!mongoose.isValidObjectId(id)) {
+      return res.status(400).json({
+        message: "Invalid image id",
+      });
+    }
+
+    const image = await Image.findOne({
       _id: id,
       userId: req.user.userId,
     });
 
     if (!image) {
       return res.status(404).json({
-        message: "image not found",
+        message: "Image not found",
       });
     }
 
+    await cloudinary.uploader.destroy(image.publicId);
+
+    await image.deleteOne();
+
     return res.status(200).json({
-      message: "image successfully deleted",
+      message: "Image successfully deleted",
     });
   } catch (error) {
+    console.error(error);
+
     return res.status(500).json({
-      message: "problem occurred in deleting the image",
+      message: "Failed to delete image",
     });
   }
 };
